@@ -1,16 +1,65 @@
+// 스타일 결정 함수
+function changeStyle() {
+    const random_number = Math.floor(Math.random() * 10) + 1
+    document.body.style.backgroundImage = `url("image/${random_number}.jpg")`;
+
+    const digital_number = document.getElementById('digital_clock');
+    switch (random_number) {
+        case 1:
+            digital_number.style.color = 'white';
+            digital_number.style.textShadow = '-1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black';
+            break;
+        case 2:
+            digital_number.style.color = 'black';
+            digital_number.style.textShadow = '-1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white';
+            break;
+        case 3:
+            digital_number.style.color = 'black';
+            digital_number.style.textShadow = '-1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white';
+            break;
+        case 4:
+            digital_number.style.color = 'black';
+            digital_number.style.textShadow = '-1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white';
+            break;
+        case 5:
+            digital_number.style.color = 'black';
+            digital_number.style.textShadow = '-1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white';
+            break;
+        case 6:
+            digital_number.style.color = 'white';
+            digital_number.style.textShadow = '-1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black';
+            break;
+        case 7:
+            digital_number.style.color = 'black';
+            digital_number.style.textShadow = '-1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white';
+            break;
+        case 8:
+            digital_number.style.color = 'black';
+            digital_number.style.textShadow = '-1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white';
+            break;
+        case 9:
+            digital_number.style.color = 'white';
+            digital_number.style.textShadow = '-1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black';
+            break;
+        case 10:
+            digital_number.style.color = 'black';
+            digital_number.style.textShadow = '-1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white';
+            break;
+    }
+}
+
 // ----------------- analog clock -----------------
 
 // 시계 눈금 그리기 함수
 function writeScales() {
     const circle = document.getElementById('base_circle');
 
-    for(let i = 0; i < 30; i++)
-    {
+    for (let i = 0; i < 30; i++) {
         const line = document.createElement('div');
         line.classList.add('scale');
         line.style.transform = `rotate(${6 * i}deg)`;
-        
-        if(i % 5)
+
+        if (i % 5)
             line.classList.add('thin');
         else
             line.classList.add('thick');
@@ -23,14 +72,12 @@ function writeScales() {
 function writeNumbers() {
     const circle = document.getElementById('base_circle');
 
-    for(let i = 1; i <= 12; i++)
-    {
+    for (let i = 1; i <= 12; i++) {
         const number = document.createElement('div');
         number.classList.add('number');
         number.innerText = i;
 
-        switch(i)
-        {
+        switch (i) {
             case 1:
                 number.style.top = '15%';
                 number.style.left = '70%';
@@ -102,7 +149,7 @@ function writeHands() {
     second_hand_2.style.transform = `rotate(${6 * second}deg)`;
     minute_hand.style.transform = `rotate(${(6 * minute + 0.1 * second + 180) % 360}deg)`;
     hour_hand.style.transform = `rotate(${(30 * hour + 0.5 * minute + 180) % 360}deg)`;
-    
+
     second_hand_1.style.transformOrigin = 'top';
     second_hand_2.style.transformOrigin = 'top';
     minute_hand.style.transformOrigin = 'top';
@@ -119,6 +166,7 @@ function analogInit() {
     writeScales();
     writeNumbers();
     writeHands();
+    changeStyle();
     return setInterval(writeHands, 1000);
 }
 
@@ -138,6 +186,7 @@ function writeTime() {
 // digital clock 로딩 함수
 function digitalInit() {
     writeTime();
+    changeStyle();
     return setInterval(writeTime, 1000);
 }
 
@@ -156,11 +205,13 @@ document.getElementById('analog_button').addEventListener("click", () => {
     analog_clock.style.display = 'block';
     digital_clock.style.display = 'none';
 
-    if(current_clock === 'digital')
-    {
+    if (current_clock === 'digital') {
         clearInterval(digital_interval);
         analog_interval = analogInit();
         current_clock = 'analog';
+    }
+    else {
+        changeStyle();
     }
 });
 
@@ -172,10 +223,12 @@ document.getElementById('digital_button').addEventListener("click", () => {
     analog_clock.style.display = 'none';
     digital_clock.style.display = 'block';
 
-    if(current_clock === 'analog')
-    {
+    if (current_clock === 'analog') {
         clearInterval(analog_interval);
         digital_interval = digitalInit();
         current_clock = 'digital';
+    }
+    else {
+        changeStyle();
     }
 });
