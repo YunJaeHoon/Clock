@@ -98,15 +98,15 @@ function writeHands() {
     const minute = today.getMinutes();
     const hour = (today.getHours() % 12);
 
-    second_hand_1.style.transform = `rotate(${6 * second}deg)`;
+    second_hand_1.style.transform = `rotate(${(6 * second + 180) % 360}deg)`;
     second_hand_2.style.transform = `rotate(${6 * second}deg)`;
-    minute_hand.style.transform = `rotate(${6 * minute + 0.1 * second}deg)`;
-    hour_hand.style.transform = `rotate(${30 * hour + 0.5 * minute}deg)`;
+    minute_hand.style.transform = `rotate(${(6 * minute + 0.1 * second + 180) % 360}deg)`;
+    hour_hand.style.transform = `rotate(${(30 * hour + 0.5 * minute + 180) % 360}deg)`;
     
-    second_hand_1.style.transformOrigin = 'bottom';
+    second_hand_1.style.transformOrigin = 'top';
     second_hand_2.style.transformOrigin = 'top';
-    minute_hand.style.transformOrigin = 'bottom';
-    hour_hand.style.transformOrigin = 'bottom';
+    minute_hand.style.transformOrigin = 'top';
+    hour_hand.style.transformOrigin = 'top';
 
     circle.appendChild(hour_hand);
     circle.appendChild(minute_hand);
